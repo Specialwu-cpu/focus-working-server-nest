@@ -1,35 +1,35 @@
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateLocalDto {
-  @IsString()
+  @IsNumber()
   fp1: number;
 
-  @IsString()
+  @IsNumber()
   fp2: number;
 
-  @IsString()
+  @IsNumber()
   fp3: number;
 
-  @IsString()
+  @IsNumber()
   fp4: number;
 
-  @IsString()
+  @IsNumber()
   x: number;
 
-  @IsString()
+  @IsNumber()
   y: number;
 }
 
 export class GetLocalDto {
-    @IsString()
+    @IsNumber()
     fp1: number;
   
-    @IsString()
+    @IsNumber()
     fp2: number;
   
-    @IsString()
+    @IsNumber()
     fp3: number;
   
-    @IsString()
+    @IsNumber()
     fp4: number;
 }
