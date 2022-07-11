@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { find } from 'rxjs';
 import { getConnection, Repository } from 'typeorm'
 import { Locations } from './entities/location.entities';
 
@@ -56,7 +57,8 @@ export class FpconnectService {
         var finarry=[];
         finarry.push(finalx);
         finarry.push(finaly);
-        return finarry;
+        var findict={"x":finalx,"y":finaly};
+        return findict;
     }
     async getAllLocation(){
         const lis1=await this.ldbRepository.find();
