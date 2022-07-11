@@ -23,7 +23,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const { username, password } = createUserDto;
-    if (this.findOne(username)) {
+    if (await this.findOne(username)) {
       throw new ConflictException(
         `User with username ${username} already exists`,
       );
