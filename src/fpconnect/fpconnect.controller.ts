@@ -7,7 +7,7 @@ export class FpconnectController {
   constructor(private readonly fpservice: FpconnectService) { }
 
   @Post()
-  fin(@Body() createlocalDto:CreateLocalDto) {
+  fin(@Body() createlocalDto: CreateLocalDto) {
     return this.fpservice.createdb(createlocalDto);
   }
   @Post('getall-local')
@@ -15,7 +15,7 @@ export class FpconnectController {
     return this.fpservice.getAllLocation();
   }
   @Post('getalocal')
-  getALocal(@Body() getlocaldto:GetLocalDto) {
+  getALocal(@Body() getlocaldto: GetLocalDto) {
     return this.fpservice.getalocation(getlocaldto)
   }
   @Get()
