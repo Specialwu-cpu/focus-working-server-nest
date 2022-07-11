@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import { CreateLocalDto, GetLocalDto } from './dto/fpconnect.dto';
 import { FpconnectService } from './fpconnect.service';
 
 @Controller('fpconnect')
@@ -6,16 +7,16 @@ export class FpconnectController {
   constructor(private readonly fpservice: FpconnectService) { }
 
   @Post()
-  fin(@Body() body) {
-    return this.fpservice.createdb(body);
+  fin(@Body() createlocalDto:CreateLocalDto) {
+    return this.fpservice.createdb(createlocalDto);
   }
   @Post('getall-local')
   getLocal(@Body() body) {
     return this.fpservice.getAllLocation();
   }
   @Post('getalocal')
-  getALocal(@Body() body) {
-    return this.fpservice.getalocation(body)
+  getALocal(@Body() getlocaldto:GetLocalDto) {
+    return this.fpservice.getalocation(getlocaldto)
   }
   @Get()
   thri() {
