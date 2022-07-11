@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 
@@ -23,6 +23,11 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const { username, password } = createUserDto;
+    if (this.findOne(username)) {
+      throw new ConflictException(
+        `User with username ${username} already exists`,
+      );
+    }
     const user = new User();
     user.username = username;
     user.password = password;
