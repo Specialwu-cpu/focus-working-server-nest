@@ -1,35 +1,46 @@
-import { IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateLocalDto {
-  @IsString()
+  @ApiProperty()
+  @IsNumber()
   fp1: number;
 
-  @IsString()
+  @ApiProperty()
+  @IsNumber()
   fp2: number;
 
-  @IsString()
+  @ApiProperty()
+  @IsNumber()
   fp3: number;
 
-  @IsString()
+  @ApiProperty()
+  @IsNumber()
   fp4: number;
 
-  @IsString()
+  @ApiProperty()
+  @IsNumber()
   x: number;
 
-  @IsString()
+  @ApiProperty()
+  @IsNumber()
   y: number;
 }
 
 export class GetLocalDto {
-    @IsString()
+    @ApiProperty()
+    @IsNumber()
     fp1: number;
   
-    @IsString()
+    @ApiProperty()
+    @IsNumber()
     fp2: number;
   
-    @IsString()
+    @ApiProperty()
+    @IsNumber()
     fp3: number;
   
-    @IsString()
+    @ApiProperty()
+    @IsNumber()
     fp4: number;
 }

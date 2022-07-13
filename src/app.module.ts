@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { FpconnectModule } from './fpconnect/fpconnect.module';
+import { AttendanceModule } from './attendance/attendance.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { FpconnectModule } from './fpconnect/fpconnect.module';
         synchronize: true,
       }),
     }),
+    AttendanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
