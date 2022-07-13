@@ -5,6 +5,9 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { FpconnectModule } from './fpconnect/fpconnect.module';
+import { ChatService } from './chat/chat.service';
+import { ChatController } from './chat/chat.controller';
+import { ChatModule } from './chat/chat.module';
 import { AttendanceModule } from './attendance/attendance.module';
 
 @Module({
@@ -12,6 +15,7 @@ import { AttendanceModule } from './attendance/attendance.module';
     AuthModule,
     UsersModule,
     FpconnectModule,
+    ChatModule,
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
@@ -26,7 +30,7 @@ import { AttendanceModule } from './attendance/attendance.module';
     }),
     AttendanceModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, ChatController],
   providers: [AppService],
 })
 export class AppModule {}
