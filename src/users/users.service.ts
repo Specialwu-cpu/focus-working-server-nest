@@ -8,12 +8,12 @@ import { User } from './entities/user.entity';
 export class UsersService {
   private readonly users: User[] = [
     {
-      userId: 1,
+      id: 1,
       username: 'xiaofan',
       password: 'xiaofanshizhu',
     },
     {
-      userId: 2,
+      id: 2,
       username: 'ruangou',
       password: 'ruangoushigou',
     },
