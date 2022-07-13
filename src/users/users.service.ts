@@ -26,13 +26,19 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const { username } = createUserDto;
-    if (await this.findOne(username)) {
-      throw new ConflictException(
-        `User with username ${username} already exists`,
-      );
+    try {
+      await this.findOne(username);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        const user = this.userRepository.create(createUserDto);
+        return this.userRepository.save(user);
+      } else {
+        throw error;
+      }
     }
-    const user = this.userRepository.create(createUserDto);
-    return this.userRepository.save(user);
+    throw new ConflictException(
+      `User with username ${username} already exists`,
+    );
   }
 
   async remove(username: string) {
