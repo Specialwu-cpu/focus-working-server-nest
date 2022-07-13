@@ -5,9 +5,6 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { FpconnectModule } from './fpconnect/fpconnect.module';
-import { ChatGateway } from './messgae/chat.gateway';
-import { MessgaeController } from './src/messgae/messgae.controller';
-import { MessageController } from './message/message.controller';
 import { MessageModule } from './message/message.module';
 import { MessageService } from './message/message.service';
 import { MessageController } from './message/message.controller';
@@ -31,7 +28,7 @@ import { MessageController } from './message/message.controller';
     }),
     MessageModule,
   ],
-  controllers: [AppController, MessgaeController, MessageController],
-  providers: [AppService, ChatGateway, MessageService],
+  controllers: [AppController, MessageController],
+  providers: [AppService, MessageService],
 })
 export class AppModule {}
