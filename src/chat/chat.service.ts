@@ -9,7 +9,7 @@ export class ChatService {
   constructor(
     @InjectRepository(Messages)
     private readonly chatRepository: Repository<Messages>,
-  ) {}
+  ) {  }
 
   createChatDB(createChatDto: CreateChatDto) {
     const message = this.chatRepository.create(createChatDto);
