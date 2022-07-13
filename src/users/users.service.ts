@@ -1,4 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 
@@ -16,6 +18,11 @@ export class UsersService {
       password: 'ruangoushigou',
     },
   ];
+
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
 
   async findOne(username: string): Promise<User | undefined> {
     return this.users.find((user) => user.username === username);
