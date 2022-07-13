@@ -5,15 +5,16 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { FpconnectModule } from './fpconnect/fpconnect.module';
-import { MessageModule } from './message/message.module';
-import { MessageService } from './message/message.service';
-import { MessageController } from './message/message.controller';
+import { ChatService } from './chat/chat.service';
+import { ChatController } from './chat/chat.controller';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     FpconnectModule,
+    ChatModule,
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
         type: 'postgres',
@@ -26,9 +27,8 @@ import { MessageController } from './message/message.controller';
         synchronize: true,
       }),
     }),
-    MessageModule,
   ],
-  controllers: [AppController, MessageController],
-  providers: [AppService, MessageService],
+  controllers: [AppController, ChatController],
+  providers: [AppService, ChatService],
 })
 export class AppModule {}
