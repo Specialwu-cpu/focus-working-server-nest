@@ -8,6 +8,7 @@ import { FpconnectModule } from './fpconnect/fpconnect.module';
 import { ChatService } from './chat/chat.service';
 import { ChatController } from './chat/chat.controller';
 import { ChatModule } from './chat/chat.module';
+import { AttendanceModule } from './attendance/attendance.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ChatModule } from './chat/chat.module';
         synchronize: true,
       }),
     }),
+    AttendanceModule,
   ],
   controllers: [AppController, ChatController],
   providers: [AppService],

@@ -5,8 +5,8 @@ import { FpconnectController } from './fpconnect.controller';
 import { FpconnectService } from './fpconnect.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Locations])],
-    controllers: [FpconnectController],
-    providers: [FpconnectService],
+  imports: [TypeOrmModule.forFeature([Locations])],
+  controllers: [FpconnectController],
+  providers: [FpconnectService],
 })
 export class FpconnectModule { }
