@@ -1,20 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsString } from 'class-validator';
+import { IsDate, IsDateString, IsString } from 'class-validator';
+import { CreateDateColumn } from 'typeorm';
 
 export class CreateChatDto {
   @ApiProperty()
   @IsString()
-  sender_name: string;
+  username: string;
 
   @ApiProperty()
   @IsString()
-  receiver_name: string;
+  friendName: string;
 
   @ApiProperty()
   @IsString()
   message: string;
 
-  @ApiProperty()
-  @IsDate()
-  time: Date;
+
 }
