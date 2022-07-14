@@ -1,5 +1,6 @@
 import { Injectable, Request } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { AttendanceEntity } from './entities/attendance.entity';
@@ -10,18 +11,31 @@ export class AttendanceService {
     @InjectRepository(AttendanceEntity)
     private userRepository: Repository<AttendanceEntity>,
 
-    private readonly userService: UsersService
+    private readonly userService: UsersService,
   ) {}
 
-  async kqfun(@Request() req){
-    const records = await this.userRepository.find({where:{user:req.user.id}});
-    const thename = await (await this.userService.findoneFromid(req.user.id)).username;
+  async kqfun(@Request() req) {
+    const thman = await this.userService.findoneFromid(req.user.id);
+    const records = await this.userRepository.find({
+      relations: {user:true},
+      where: { user:  thman  }
+    });
+    const thename = await (
+      await this.userService.findoneFromid(req.user.id)
+    ).username;
     const timeTable = [];
-    for(var i=0;i<records.length;i++){
+    if (!records) {
+      return { msg: '没打过卡' };
+    }
+    for (var i = 0; i < records.length; i++) {
       const findate = records[i].date.toLocaleDateString();
       timeTable.push(findate);
     }
-    return{"name":thename,"date":timeTable};
+    var final = [];
+    for (var i = 0; i < records.length; i++) {
+      final.push({ name: thename, date: timeTable[i] });
+    }
+    return final;
   }
 
   async signIn(@Request() req) {
