@@ -50,7 +50,7 @@ export class AttendanceService {
     });
     if (!signRecord) {
       const anattend = this.userRepository.create({
-        user: req.user.id,
+        user: req.user,
         IsGoOut: false,
         IsAskLeave: false,
         date: today,
