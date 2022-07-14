@@ -7,7 +7,7 @@ export class AttendanceController {
   constructor(private readonly attendanceService:AttendanceService){}
   
   @UseGuards(JwtAuthGuard)
-  @Get('info')
+  @Get('sighin')
   async info(@Request() req) {
     return this.attendanceService.signIn(req);
   }

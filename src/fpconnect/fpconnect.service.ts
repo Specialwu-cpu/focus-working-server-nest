@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { find } from 'rxjs';
 import { getConnection, Repository } from 'typeorm';
 import { CreateLocalDto, GetLocalDto } from './dto/fpconnect.dto';
+import { AllLocalEntity } from './entities/all-local.entity';
 import { Locations } from './entities/location.entities';
 
 @Injectable()
@@ -10,6 +11,9 @@ export class FpconnectService {
   constructor(
     @InjectRepository(Locations)
     private readonly ldbRepository: Repository<Locations>,
+
+    @InjectRepository(AllLocalEntity)
+    private readonly readdress: Repository<AllLocalEntity>,
   ) {}
 
   createdb(body: CreateLocalDto) {
@@ -24,7 +28,7 @@ export class FpconnectService {
     return this.ldbRepository.save(ldb);
   }
 
-  async getalocation(body: GetLocalDto) {
+  async getalocation(body: GetLocalDto,req: any) {
     const lis1 = await this.ldbRepository.find();
     var alist = [];
     for (var i = 0; i < lis1.length; i++) {
@@ -66,6 +70,45 @@ export class FpconnectService {
     finarry.push(finalx);
     finarry.push(finaly);
     var findict = { x: finalx, y: finaly };
+    if(finalx>3&&finaly>3){
+      const sksksks = 0;
+    }
+    else{
+      const firstone = await this.readdress.findOne({where: {user:req.user.id}});
+      if(!firstone){
+        var date = require("silly-datetime");
+        var today = date.format(new Date());
+        const newfirst = this.readdress.create({
+          user:req.user.id,
+          x:finalx,
+          y:finaly,
+          date:today
+        })
+        this.readdress.save(newfirst);
+      }
+      else{
+        var date = require("silly-datetime");
+        var today = date.format(new Date());
+        const whichone = await this.readdress.findOne({where: {user:req.user.id}});
+        let anumber = whichone.id;
+        let lasttime = whichone.date;
+        let nowt = new Date();
+        var lasttime_s = lasttime.getTime();
+        lasttime.setTime(lasttime_s+1000*60*10);
+        const updatelocal = await this.readdress.preload({
+          id:anumber,
+          x:finalx,
+          y:finaly,
+          date:today
+        });
+        this.readdress.save(updatelocal);
+        if(nowt>lasttime){
+          return{
+            message:"拉屎超时啦！！"
+          }
+        }
+      }
+    }
     return findict;
   }
 

@@ -4,11 +4,13 @@ import { UsersController } from './users.controller';
 import { AttendanceModule } from 'src/attendance/attendance.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
+import { FpconnectModule } from 'src/fpconnect/fpconnect.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
-    AttendanceModule
+    AttendanceModule,
+    FpconnectModule
   ],
   providers: [UsersService],
   exports: [UsersService],

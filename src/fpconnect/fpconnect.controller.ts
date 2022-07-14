@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, Request } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateLocalDto, GetLocalDto } from './dto/fpconnect.dto';
 import { FpconnectService } from './fpconnect.service';
 
@@ -14,9 +15,11 @@ export class FpconnectController {
   getLocal(@Body() body) {
     return this.fpservice.getAllLocation();
   }
+
+  @UseGuards(JwtAuthGuard)
   @Post('getalocal')
-  getALocal(@Body() getlocaldto: GetLocalDto) {
-    return this.fpservice.getalocation(getlocaldto)
+  getALocal(@Body() getlocaldto: GetLocalDto,@Request() req) {
+    return this.fpservice.getalocation(getlocaldto,req)
   }
   @Get()
   thri() {
