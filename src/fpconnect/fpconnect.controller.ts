@@ -21,6 +21,11 @@ export class FpconnectController {
   getALocal(@Body() getlocaldto: GetLocalDto,@Request() req) {
     return this.fpservice.getalocation(getlocaldto,req)
   }
+  @Post('getother')
+  getother(@Body() body){
+    return this.fpservice.getothers(body);
+  }
+
   @Get()
   thri() {
     return '1145141919810\n逸一时误一世，逸久逸久罢已凌'
