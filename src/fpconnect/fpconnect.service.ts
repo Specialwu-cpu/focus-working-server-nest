@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { find } from 'rxjs';
+import { User } from 'src/users/entities/user.entity';
+import { UsersService } from 'src/users/users.service';
 import { getConnection, Repository } from 'typeorm';
 import { CreateLocalDto, GetLocalDto } from './dto/fpconnect.dto';
 import { AllLocalEntity } from './entities/all-local.entity';
@@ -14,6 +16,8 @@ export class FpconnectService {
 
     @InjectRepository(AllLocalEntity)
     private readonly readdress: Repository<AllLocalEntity>,
+
+    private readonly userservice: UsersService
   ) {}
 
   createdb(body: CreateLocalDto) {
@@ -26,6 +30,17 @@ export class FpconnectService {
       y: body.y,
     });
     return this.ldbRepository.save(ldb);
+  }
+
+  async getothers(body:any){
+    const anuser = await this.userservice.findOne(body.queryPerson);
+     const goodthing = await this.readdress.findOne({where:{id:anuser.id}});
+     if(!goodthing){
+      return{'message':'该人不在定位'};
+     }
+     else{
+      return{'x':goodthing.x,'y':goodthing.y};
+     }
   }
 
   async getalocation(body: GetLocalDto,req: any) {

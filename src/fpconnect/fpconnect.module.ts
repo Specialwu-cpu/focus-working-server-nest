@@ -10,7 +10,7 @@ import { FpconnectService } from './fpconnect.service';
   imports: [
     TypeOrmModule.forFeature([Locations]),
     TypeOrmModule.forFeature([AllLocalEntity]),
-    forwardRef(()=>UsersModule)            
+    forwardRef(()=>UsersModule)          
   ],
   controllers: [FpconnectController],
   providers: [FpconnectService],
