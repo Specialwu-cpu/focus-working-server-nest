@@ -42,9 +42,10 @@ export class AttendanceService {
     var date = require('silly-datetime');
     var today = date.format(new Date(), 'YYYY-MM-DD');
     const signRecord = await this.userRepository.findOne({
+      relations: {user:true},
       where: {
         date: today,
-        user: req.user.id,
+        user: req.user,
       },
     });
     if (!signRecord) {
