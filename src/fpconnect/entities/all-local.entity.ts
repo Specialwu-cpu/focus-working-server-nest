@@ -10,7 +10,7 @@ export class AllLocalEntity {
 
   @OneToOne(type=>User,User=>User.location)
   @JoinColumn()
-  user:string;
+  user:User;
 
   @Column({type:'float'})
   x:number;

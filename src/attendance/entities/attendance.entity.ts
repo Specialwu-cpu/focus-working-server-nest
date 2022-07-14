@@ -1,5 +1,5 @@
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class AttendanceEntity {
@@ -7,7 +7,8 @@ export class AttendanceEntity {
   id:number;
 
   @ManyToOne(type=>User,User=>User.attendTable)
-  user:string;
+  @JoinColumn()
+  user:User;
 
   @Column()
   IsAskLeave:boolean;
